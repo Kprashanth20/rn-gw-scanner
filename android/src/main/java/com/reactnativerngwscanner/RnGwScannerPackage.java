@@ -17,6 +17,6 @@ public class RnGwScannerPackage implements ReactPackage {
 
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-        return Arrays.<ViewManager>asList(new RnGwScannerViewManager());
+        return Arrays.<ViewManager>asList(new RnGwScannerViewManager(reactContext));
     }
 }

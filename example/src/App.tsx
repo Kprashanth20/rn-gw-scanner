@@ -1,12 +1,24 @@
 import * as React from 'react';
 
 import { StyleSheet, View } from 'react-native';
-import { RnGwScannerView } from 'react-native-rn-gw-scanner';
+import { RnGwScannerView, ScanType } from 'react-native-rn-gw-scanner';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <RnGwScannerViewManager color="#32a852" style={styles.box} />
+      <RnGwScannerView
+        scanType={ScanType.All}
+        additionalScanTypes={[]}
+        rectWidth={200}
+        rectHeight={200}
+        continuouslyScan={false}
+        enableReturnOriginalScan={false}
+        flashOnLightChange={false}
+        flashAvailable={false}
+        onNewScan={(scan) => {
+          console.log(scan);
+        }}
+      />
     </View>
   );
 }
