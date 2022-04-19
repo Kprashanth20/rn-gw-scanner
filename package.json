@@ -1,6 +1,6 @@
 {
   "name": "react-native-rn-gw-scanner",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "scanner",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -36,13 +36,13 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/otmanecherradi/react-native-rn-gw-scanner",
+  "repository": "https://github.com/Kprashanth20/rn-gw-scanner",
   "author": "Otmane <51253168+otmanecherradi@users.noreply.github.com> (https://github.com/otmanecherradi)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/otmanecherradi/react-native-rn-gw-scanner/issues"
+    "url": "https://github.com/Kprashanth20/rn-gw-scanner/issues"
   },
-  "homepage": "https://github.com/otmanecherradi/react-native-rn-gw-scanner#readme",
+  "homepage": "https://github.com/Kprashanth20/rn-gw-scanner#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
