@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
+import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.google.gson.Gson;
@@ -44,7 +45,7 @@ public class RnGwScannerView extends FrameLayout {
     RESPONSE("response"),
     ORIGINAL_SCAN_LOAD("originalScanLoad");
 
-    private String eventName;
+    private final String eventName;
 
     Event(String eventName) {
       this.eventName = eventName;
@@ -67,8 +68,12 @@ public class RnGwScannerView extends FrameLayout {
     this.scanType = scanType;
   }
 
-  public void setAdditionalScanTypes(int[] additionalScanTypes) {
-    this.additionalScanTypes = additionalScanTypes;
+  public void setAdditionalScanTypes(ReadableArray additionalScanTypes) {
+    int[] l = new int[additionalScanTypes.size()];
+    for (int idx = 0; idx < additionalScanTypes.size(); idx += 1) {
+      l[idx] = additionalScanTypes.getInt(idx);
+    }
+    this.additionalScanTypes = l;
   }
 
   public void setContinuouslyScan(boolean continuouslyScan) {

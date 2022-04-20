@@ -10,6 +10,7 @@ import androidx.collection.ArrayMap;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.ViewGroupManager;
@@ -57,7 +58,7 @@ public class RnGwScannerViewManager extends ViewGroupManager<RnGwScannerView> {
   }
 
   @ReactProp(name = "additionalScanTypes")
-  public void setAdditionalScanTypes(RnGwScannerView view, int[] additionalScanTypes) {
+  public void setAdditionalScanTypes(RnGwScannerView view, ReadableArray additionalScanTypes) {
     view.setAdditionalScanTypes(additionalScanTypes);
   }
 
