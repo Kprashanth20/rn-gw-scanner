@@ -34,8 +34,6 @@ public class RnGwScannerView extends FrameLayout {
 
   private RemoteView remoteView;
 
-  int mScreenWidth;
-  int mScreenHeight;
   private final Gson gson;
   private ImageView flashButton;
   private boolean isFlashAvailable;
@@ -109,11 +107,11 @@ public class RnGwScannerView extends FrameLayout {
     DisplayMetrics dm = getResources().getDisplayMetrics();
     float density = dm.density;
 
-    mScreenWidth = getResources().getDisplayMetrics().widthPixels;
-    mScreenHeight = getResources().getDisplayMetrics().heightPixels;
+    int mScreenWidth = getResources().getDisplayMetrics().widthPixels;
+    int mScreenHeight = getResources().getDisplayMetrics().heightPixels;
 
-    int scanFrameSizeHeight = (int) (rectHeight * density);
-    int scanFrameSizeWidth = (int) (rectWidth * density);
+    int scanFrameSizeHeight = (int) (200 * density);
+    int scanFrameSizeWidth = (int) (200 * density);
 
     Rect rect = new Rect();
     rect.left = mScreenWidth / 2 - scanFrameSizeWidth / 2;
