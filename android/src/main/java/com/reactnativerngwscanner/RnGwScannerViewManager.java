@@ -25,16 +25,12 @@ public class RnGwScannerViewManager extends ViewGroupManager<RnGwScannerView> {
   public static final String REACT_CLASS = "RnGwScannerView";
 
   private final ReactApplicationContext reactContext;
+
   @SuppressLint("StaticFieldLeak")
   private static RemoteView remoteView;
-  @SuppressLint("StaticFieldLeak")
-  private static ImageView flashButton;
 
-  private final int[] img = {R.drawable.flashlight_on, R.drawable.flashlight_off};
-
-  public static void setViews(RemoteView remoteView, ImageView flashButton) {
+  public static void setViews(RemoteView remoteView) {
     RnGwScannerViewManager.remoteView = remoteView;
-    RnGwScannerViewManager.flashButton = flashButton;
   }
 
   public RnGwScannerViewManager(ReactApplicationContext reactContext) {
@@ -59,21 +55,6 @@ public class RnGwScannerViewManager extends ViewGroupManager<RnGwScannerView> {
     view.setScanType(scanType);
   }
 
-  @ReactProp(name = "additionalScanTypes")
-  public void setAdditionalScanTypes(RnGwScannerView view, ReadableArray additionalScanTypes) {
-    view.setAdditionalScanTypes(additionalScanTypes);
-  }
-
-  @ReactProp(name = "rectWidth", defaultFloat = 200f)
-  public void setRectWidth(RnGwScannerView view, float rectWidth) {
-    view.setRectWidth(rectWidth);
-  }
-
-  @ReactProp(name = "rectHeight", defaultFloat = 200f)
-  public void setRectHeight(RnGwScannerView view, float rectHeight) {
-    view.setRectHeight(rectHeight);
-  }
-
   @ReactProp(name = "continuouslyScan", defaultBoolean = false)
   public void setContinuouslyScan(RnGwScannerView view, boolean continuouslyScan) {
     view.setContinuouslyScan(continuouslyScan);
@@ -82,16 +63,6 @@ public class RnGwScannerViewManager extends ViewGroupManager<RnGwScannerView> {
   @ReactProp(name = "enableReturnOriginalScan", defaultBoolean = false)
   public void setEnableReturnOriginalScan(RnGwScannerView view, boolean enableReturnOriginalScan) {
     view.setEnableReturnOriginalScan(enableReturnOriginalScan);
-  }
-
-  @ReactProp(name = "flashOnLightChange", defaultBoolean = false)
-  public void setFlashOnLightChange(RnGwScannerView view, boolean flashOnLightChange) {
-    view.setFlashOnLightChange(flashOnLightChange);
-  }
-
-  @ReactProp(name = "flashAvailable", defaultBoolean = false)
-  public void setFlashAvailable(RnGwScannerView view, boolean flashAvailable) {
-    view.setFlashAvailable(flashAvailable);
   }
 
   @ReactMethod
@@ -109,20 +80,6 @@ public class RnGwScannerViewManager extends ViewGroupManager<RnGwScannerView> {
     if (remoteView != null) {
       remoteView.resumeContinuouslyScan();
       promise.resolve(true);
-    } else {
-      promise.reject("remoteViewError", "Remote View is not initiated");
-    }
-  }
-
-  @ReactMethod
-  public void switchLight(final Promise promise) {
-    if (remoteView != null) {
-      remoteView.switchLight();
-      if (remoteView.getLightStatus()) {
-        flashButton.setImageResource(img[1]);
-      } else {
-        flashButton.setImageResource(img[0]);
-      }
     } else {
       promise.reject("remoteViewError", "Remote View is not initiated");
     }

@@ -6,14 +6,12 @@ import android.graphics.Rect;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.DisplayMetrics;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
-import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.google.gson.Gson;
@@ -25,20 +23,11 @@ import java.io.ByteArrayOutputStream;
 
 public class RnGwScannerView extends FrameLayout {
   private int scanType;
-  private int[] additionalScanTypes;
   private boolean continuouslyScan;
   private boolean enableReturnOriginalScan;
-  private float rectHeight;
-  private float rectWidth;
-  private boolean flashOnLightChange;
 
   private RemoteView remoteView;
-
   private final Gson gson;
-  private ImageView flashButton;
-  private boolean isFlashAvailable;
-
-  private final int[] img = {R.drawable.flashlight_on, R.drawable.flashlight_off};
 
   public enum Event {
     RESPONSE("response"),
@@ -66,14 +55,6 @@ public class RnGwScannerView extends FrameLayout {
     this.scanType = scanType;
   }
 
-  public void setAdditionalScanTypes(ReadableArray additionalScanTypes) {
-    int[] l = new int[additionalScanTypes.size()];
-    for (int idx = 0; idx < additionalScanTypes.size(); idx += 1) {
-      l[idx] = additionalScanTypes.getInt(idx);
-    }
-    this.additionalScanTypes = l;
-  }
-
   public void setContinuouslyScan(boolean continuouslyScan) {
     this.continuouslyScan = continuouslyScan;
   }
@@ -82,27 +63,10 @@ public class RnGwScannerView extends FrameLayout {
     this.enableReturnOriginalScan = enableReturnOriginalScan;
   }
 
-  public void setRectHeight(float rectHeight) {
-    this.rectHeight = rectHeight;
-  }
-
-  public void setRectWidth(float rectWidth) {
-    this.rectWidth = rectWidth;
-  }
-
-  public void setFlashOnLightChange(boolean flashOnLightChange) {
-    this.flashOnLightChange = flashOnLightChange;
-  }
-
-  public void setFlashAvailable(boolean flashAvailable) {
-    isFlashAvailable = flashAvailable;
-  }
-
   private void initView() {
     inflate(getContext(), R.layout.scanner_view, this);
 
     ImageView scanFrame = findViewById(R.id.scan_area);
-    flashButton = findViewById(R.id.flush_btn);
 
     DisplayMetrics dm = getResources().getDisplayMetrics();
     float density = dm.density;
@@ -127,34 +91,15 @@ public class RnGwScannerView extends FrameLayout {
     RemoteView.Builder builder = new RemoteView.Builder()
       .setContext(((ReactContext) getContext()).getCurrentActivity())
       .setBoundingBox(rect)
-      .setFormat(scanType, additionalScanTypes)
+      .setFormat(scanType)
       .setContinuouslyScan(continuouslyScan);
 
     if (enableReturnOriginalScan) {
-      builder.enableReturnBitmap();   //Get original scan
+      builder.enableReturnBitmap();
     }
 
     remoteView = builder.build();
-    RnGwScannerViewManager.setViews(remoteView, flashButton);
-
-    flashButton.setVisibility(View.INVISIBLE);
-
-    // When the light is dim, this API is called back to display the flashlight switch.
-    if (flashOnLightChange) {
-      setFlashOperation();
-      remoteView.setOnLightVisibleCallback(visible -> {
-        if (visible) {
-          flashButton.setVisibility(View.VISIBLE);
-        } else {
-          flashButton.setVisibility(View.INVISIBLE);
-        }
-      });
-    }
-
-    if (isFlashAvailable) {
-      flashButton.setVisibility(View.VISIBLE);
-      setFlashOperation();
-    }
+    RnGwScannerViewManager.setViews(remoteView);
 
     remoteView.setOnResultCallback(result -> {
       if (enableReturnOriginalScan) {
@@ -173,7 +118,6 @@ public class RnGwScannerView extends FrameLayout {
             sendEvent("topOnNewScan", event);
           }
 
-
         } else {
           WritableMap event = Arguments.createMap();
           event.putString("type", Event.RESPONSE.getName());
@@ -181,18 +125,6 @@ public class RnGwScannerView extends FrameLayout {
 
           sendEvent("topOnNewScan", event);
         }
-      }
-    });
-  }
-
-  private void setFlashOperation() {
-    flashButton.setOnClickListener(v -> {
-      if (remoteView.getLightStatus()) {
-        remoteView.switchLight();
-        flashButton.setImageResource(img[1]);
-      } else {
-        remoteView.switchLight();
-        flashButton.setImageResource(img[0]);
       }
     });
   }

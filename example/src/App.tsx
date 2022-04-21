@@ -8,13 +8,8 @@ export default function App() {
     <View style={styles.container}>
       <RnGwScannerView
         scanType={ScanType.All}
-        additionalScanTypes={[]}
-        rectWidth={200}
-        rectHeight={200}
         continuouslyScan={false}
         enableReturnOriginalScan={false}
-        flashOnLightChange={false}
-        flashAvailable={false}
         onNewScan={(scan) => {
           console.log(scan);
         }}
