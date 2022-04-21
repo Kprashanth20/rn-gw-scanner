@@ -9,13 +9,8 @@ const LINKING_ERROR =
 
 type RnGwScannerProps = {
   scanType: number;
-  additionalScanTypes: number[];
-  rectWidth: number;
-  rectHeight: number;
   continuouslyScan: boolean;
   enableReturnOriginalScan: boolean;
-  flashOnLightChange: boolean;
-  flashAvailable: boolean;
   onNewScan: Function;
 };
 
