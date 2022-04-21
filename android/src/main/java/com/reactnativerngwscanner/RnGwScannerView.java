@@ -124,6 +124,8 @@ public class RnGwScannerView extends FrameLayout {
     scanFrame.getLayoutParams().height = rect.height();
     scanFrame.getLayoutParams().width = rect.width();
 
+    Toast.makeText(getContext(), "height " + rect.height() + " width " + rect.width(), Toast.LENGTH_SHORT).show();
+
     RemoteView.Builder builder = new RemoteView.Builder()
       .setContext(((ReactContext) getContext()).getCurrentActivity())
       .setBoundingBox(rect)

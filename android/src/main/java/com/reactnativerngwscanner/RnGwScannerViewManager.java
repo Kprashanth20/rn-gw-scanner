@@ -49,6 +49,8 @@ public class RnGwScannerViewManager extends ViewGroupManager<RnGwScannerView> {
   @Override
   @NonNull
   public RnGwScannerView createViewInstance(@NonNull ThemedReactContext reactContext) {
+    Toast.makeText(reactContext, "RnGwScannerView createViewInstance", Toast.LENGTH_SHORT).show();
+    
     return new RnGwScannerView(reactContext);
   }
 
