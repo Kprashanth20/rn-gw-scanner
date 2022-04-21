@@ -9,6 +9,7 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
@@ -55,7 +56,6 @@ public class RnGwScannerView extends FrameLayout {
       return eventName;
     }
   }
-
 
   public RnGwScannerView(Context context) {
     super(context);
