@@ -1,38 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent">
 
-  <RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <ImageView
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layout_centerInParent="true"
-      android:alpha="0.1"
-      android:background="#FF000000" />
-
-    <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_above="@id/scan_area"
-      android:layout_centerHorizontal="true"
-      android:layout_marginBottom="10dp"
-      android:text="Place the code within the frame"
-      android:textAllCaps="false"
-      android:textColor="#FFFFFF"
-      android:textSize="15sp"
-      android:textStyle="bold" />
-
-    <ImageView
-      android:id="@+id/scan_area"
-      android:layout_width="240dp"
-      android:layout_height="240dp"
-      android:layout_centerInParent="true"
-      android:layout_centerHorizontal="true"
-      android:background="@drawable/colors" />
-  </RelativeLayout>
+  <ImageView android:id="@+id/scan_area" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@drawable/colors" android:contentDescription="" />
 
 </FrameLayout>
