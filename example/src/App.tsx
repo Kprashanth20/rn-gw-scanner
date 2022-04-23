@@ -1,15 +1,13 @@
 import * as React from 'react';
 
 import { StyleSheet, View } from 'react-native';
-import { RnGwScannerView, ScanType } from 'react-native-rn-gw-scanner';
+import { RnGwScannerView } from 'react-native-rn-gw-scanner';
 
 export default function App() {
   return (
     <View style={styles.container}>
       <RnGwScannerView
-        scanType={ScanType.All}
-        continuouslyScan={false}
-        enableReturnOriginalScan={false}
+        style={styles.box}
         onNewScan={(scan) => {
           console.log(scan);
         }}

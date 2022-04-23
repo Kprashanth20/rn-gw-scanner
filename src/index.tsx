@@ -8,9 +8,6 @@ const LINKING_ERROR =
   '- You are not using Expo managed workflow\n';
 
 type RnGwScannerProps = {
-  scanType: number;
-  continuouslyScan: boolean;
-  enableReturnOriginalScan: boolean;
   onNewScan: Function;
 };
 
@@ -22,9 +19,6 @@ export const RnGwScannerViewNative =
     : () => {
         throw new Error(LINKING_ERROR);
       };
-
-// @ts-ignore
-export const ScanType = RnGwScannerViewNative.SCAN_TYPES;
 
 // @ts-ignore
 export class RnGwScannerView extends Component<RnGwScannerProps> {
